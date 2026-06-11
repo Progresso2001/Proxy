@@ -177,3 +177,53 @@ const minhaProxy = new Proxy(dadoPessoa, handler)
 // console.log(minhaProxy.idade)
 minhaProxy.idade =  45
 console.log(minhaProxy)
+
+const frutas = {
+    nome: 'uva',
+    cor: "verde"
+}
+const handler = {
+    set(frutas, prop, valor){
+        if(prop ==='quantidade'){
+            if(valor === 'Number'){
+            console.log(`valor inteiro inserido:${frutas[prop]}`)
+            }
+            if(valor < 0){
+                throw new Error("Valor deve ser positivo")
+            }
+            else if(!Number.isInteger(valor)){
+                throw new Error("valor deve ser numero")
+            }
+        }
+    }
+}
+
+const proxy = new Proxy(frutas, handler)
+// proxy.quantidade = 500
+proxy.quantidade = 67
+console.log(Object.hasOwn(proxy, 'quantidade'))
+if(Object.hasOwn(proxy, 'quantidade')){
+    console.log('valor da quantidade:', proxy.quantidade)
+}
+
+// configurar dado vazio
+const dadoVazio = {}
+
+const handler = {
+    set(obj, prop, valor){
+        // console.log(`Inserindo dado ${prop} :${valor}`)
+        // permite valor vazio
+        obj[prop] = valor
+        return true
+    }
+}
+const proxy = new Proxy(dadoVazio, handler)
+proxy.nome = 'DevJocas'
+proxy.idade= 45
+proxy.cidade = undefined
+if(proxy.cidade === undefined){
+    proxy.cidade = 'Luanda'
+    console.log("Valor da cidade definida:", proxy.cidade)
+}
+
+console.log(proxy)
