@@ -248,3 +248,16 @@ const proxyValor = new Proxy(pessoa, handler)
 proxyValor.nome = ""
 proxyValor.nome = "Pedro"
 console.log(proxyValor)
+
+// Set + Reflect.set()
+const vazio = {nome:""}
+const handler={
+    set(target, prop, valor){
+        //aceita valores vazio
+        if(valor==='' || valor===null){
+            console.log(`Configurando a prop: ${prop}`)
+        }
+        // Usando reflect.set para comportamento padrao
+        return Reflect.set(target, prop, valor)
+    }
+}
