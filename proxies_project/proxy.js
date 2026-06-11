@@ -142,3 +142,38 @@ const handler = {
 const proxy = new Proxy(pessoa, handler)
 console.log(proxy.nome)
 console.log(proxy.idade)
+
+// Exemplos simples usando get e set
+const dadoPessoa  = {
+    nome: "DevJocas",
+  }
+// const handler = {
+//     get(dadoPessoa, prop){
+//         console.log(`Tem a propriedade: ${prop}`)
+//         return `Valor da prop: ${dadoPessoa[prop]}`
+//     }
+// }
+// const minhaProxy = new Proxy(dadoPessoa, handler)
+// console.log(minhaProxy.nome)
+
+const handler = {
+    set(dadoPessoa, prop, valor){
+        if(prop === 'idade'){
+            if(typeof valor !== 'number'){
+                throw new Error('Idade deve ser um numero')
+            }else{
+                if(valor < 18){
+                    throw new Error("Idade deve ser maior de 18")
+                }
+            }
+            return dadoPessoa[prop] = valor
+            return true
+           
+        }
+        
+    }
+}
+const minhaProxy = new Proxy(dadoPessoa, handler)
+// console.log(minhaProxy.idade)
+minhaProxy.idade =  45
+console.log(minhaProxy)
