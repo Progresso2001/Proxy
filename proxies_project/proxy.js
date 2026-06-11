@@ -227,3 +227,24 @@ if(proxy.cidade === undefined){
 }
 
 console.log(proxy)
+
+
+//configuarando com valores: "" e null
+const pessoa = {nome: ""}
+const handler = {
+    set(target, prop, valor){
+        // se é vazio e permite
+        if(valor ==="" || valor===null){
+            console.log(`valor vazio permitido para: ${prop}`)
+            target[prop] = valor
+            return true
+        }
+        // // se o valor tem conteudo e tambem permite
+        target[prop] = valor
+        return true
+    }
+}
+const proxyValor = new Proxy(pessoa, handler)
+proxyValor.nome = ""
+proxyValor.nome = "Pedro"
+console.log(proxyValor)
