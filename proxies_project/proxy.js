@@ -147,14 +147,14 @@ console.log(proxy.idade)
 const dadoPessoa  = {
     nome: "DevJocas",
   }
-// const handler = {
-//     get(dadoPessoa, prop){
-//         console.log(`Tem a propriedade: ${prop}`)
-//         return `Valor da prop: ${dadoPessoa[prop]}`
-//     }
-// }
-// const minhaProxy = new Proxy(dadoPessoa, handler)
-// console.log(minhaProxy.nome)
+const handler = {
+    get(dadoPessoa, prop){
+        console.log(`Tem a propriedade: ${prop}`)
+        return `Valor da prop: ${dadoPessoa[prop]}`
+    }
+}
+const minhaProxy = new Proxy(dadoPessoa, handler)
+console.log(minhaProxy.nome)
 
 const handler = {
     set(dadoPessoa, prop, valor){
