@@ -44,7 +44,7 @@ delete proxy.senha
 delete proxy.idade
 console.log(proxy)
 
-// USANDO HAS
+// USANDO HAS usa o In para verificar a existencia de uma prop
 
 const pessoa = {nome:"Alberto", idade:23}
 const handler =  {
